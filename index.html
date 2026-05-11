@@ -1,171 +1,261 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aimbot 70% Grafik MC</title>
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aimbot 70%</title>
 
-body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-/* Background Login */
-#loginPage{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:url('samurai.jpg') center/cover no-repeat;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+    body {
+      background: #111;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
 
-/* Background Menu */
-#menuPage{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:url('samurai.jpg') center/cover no-repeat;
-    display:none;
-    justify-content:center;
-    align-items:center;
-}
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 0;
+    }
 
-.overlay{
-    background:rgba(0,0,0,0.75);
-    padding:30px;
-    border-radius:20px;
-    text-align:center;
-    color:white;
-    width:300px;
-    backdrop-filter:blur(5px);
-}
+    .box {
+      position: relative;
+      z-index: 2;
+      width: 340px;
+      background: rgba(20,20,20,0.95);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.3);
+    }
 
-h1{
-    margin-bottom:20px;
-    color:red;
-}
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: cyan;
+    }
 
-input{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    margin-bottom:15px;
-}
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #222;
+      color: white;
+    }
 
-button{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:red;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 10px;
+      background: cyan;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.switch{
-    margin-top:20px;
-}
+    .menu {
+      display: none;
+    }
 
-.toggle{
-    width:70px;
-    height:35px;
-    background:#444;
-    border-radius:30px;
-    position:relative;
-    margin:auto;
-    cursor:pointer;
-}
+    .module {
+      background: #1f1f1f;
+      padding: 10px;
+      border-radius: 12px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-.toggle::before{
-    content:'';
-    position:absolute;
-    width:28px;
-    height:28px;
-    background:white;
-    border-radius:50%;
-    top:3px;
-    left:4px;
-    transition:0.3s;
-}
+    .switch {
+      width: 50px;
+      height: 25px;
+      background: #444;
+      border-radius: 30px;
+      position: relative;
+      cursor: pointer;
+    }
 
-.toggle.active{
-    background:limegreen;
-}
+    .switch::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2.5px;
+      left: 3px;
+      transition: 0.3s;
+    }
 
-.toggle.active::before{
-    left:38px;
-}
+    .switch.active {
+      background: lime;
+    }
 
-.status{
-    margin-top:10px;
-    color:#fff;
-}
-</style>
+    .switch.active::before {
+      left: 27px;
+    }
+
+    .admin-panel {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #444;
+      display: none;
+    }
+
+    .status {
+      text-align: center;
+      margin-top: 10px;
+      color: lime;
+    }
+  </style>
 </head>
 <body>
 
-<div id="loginPage">
-    <div class="overlay">
-        <h1>Aimbot 70%</h1>
-        <input type="password" id="password" placeholder="Masukkan Password">
-        <button onclick="login()">LOGIN</button>
+<div class="overlay"></div>
+
+<div class="box">
+
+  <!-- LOGIN -->
+  <div id="loginPage">
+    <h1>Aimbot 70%</h1>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">LOGIN</button>
+
+    <div class="status" id="loginStatus"></div>
+  </div>
+
+  <!-- MENU -->
+  <div class="menu" id="menuPage">
+    <h1>MENU PANEL</h1>
+
+    <div class="module">
+      <span>Grafik Minecraft</span>
+      <div class="switch" onclick="toggle(this)"></div>
     </div>
+
+    <div class="module">
+      <span>Module Gacor No Lag</span>
+      <div class="switch" onclick="toggle(this)"></div>
+    </div>
+
+    <div class="module">
+      <span>Aim Body</span>
+      <div class="switch" onclick="toggle(this)"></div>
+    </div>
+
+    <div class="module">
+      <span>FPS Boost</span>
+      <div class="switch" onclick="toggle(this)"></div>
+    </div>
+
+    <div class="module">
+      <span>Ultra Smooth</span>
+      <div class="switch" onclick="toggle(this)"></div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="admin-panel" id="adminPanel">
+      <h1 style="font-size:20px;">ADMIN PANEL</h1>
+
+      <input type="text" id="newUser" placeholder="Buat Username Baru">
+      <input type="password" id="newPass" placeholder="Buat Password Baru">
+
+      <button onclick="createAccount()">BUAT AKUN</button>
+    </div>
+  </div>
 </div>
 
-<div id="menuPage">
-    <div class="overlay">
-        <h1>Menu Aimbot</h1>
+<audio id="onSound">
+  <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3" type="audio/mpeg">
+</audio>
 
-        <div class="switch">
-            <div class="toggle" id="toggleBtn" onclick="toggleAimbot()"></div>
-            <div class="status" id="status">NONAKTIF</div>
-        </div>
-    </div>
-</div>
-
-<audio id="onSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
-<audio id="offSound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+<audio id="offSound">
+  <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-function login(){
-    const pass = document.getElementById('password').value;
+  // GANTI URL BACKGROUND DI SINI
+  document.body.style.backgroundImage = "url('https://www.google.com/imgres?imgurl=https://lookaside.instagram.com/seo/google_widget/crawler/?media_id%3D3876585038007994440&imgrefurl=https://www.instagram.com/p/DXMZZElD2an/&h=1920&w=1440&tbnid=F70EWgm9QB1bRM&tbnh=259&tbnw=194&osm=1&hcb=1&source=lens-native&docid=t-RLtphDBjVjJM')";
 
-    if(pass === 'kadutgmg'){
-        document.getElementById('loginPage').style.display = 'none';
-        document.getElementById('menuPage').style.display = 'flex';
-    }else{
-        alert('Password Salah');
+  let users = {
+    "70": "70"
+  };
+
+  function login() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(users[user] && users[user] === pass) {
+      localStorage.setItem("login", "true");
+      localStorage.setItem("user", user);
+
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("menuPage").style.display = "block";
+
+      document.getElementById("loginStatus").innerHTML = "Login sukses";
+
+      if(user === "70") {
+        document.getElementById("adminPanel").style.display = "block";
+      }
+
+    } else {
+      document.getElementById("loginStatus").innerHTML = "Username / Password salah";
     }
-}
+  }
 
-function toggleAimbot(){
-    const toggle = document.getElementById('toggleBtn');
-    const status = document.getElementById('status');
+  function toggle(el) {
+    el.classList.toggle("active");
 
-    toggle.classList.toggle('active');
-
-    if(toggle.classList.contains('active')){
-        status.innerText = 'AKTIF';
-        document.getElementById('onSound').play();
-    }else{
-        status.innerText = 'NONAKTIF';
-        document.getElementById('offSound').play();
+    if(el.classList.contains("active")) {
+      document.getElementById("onSound").play();
+    } else {
+      document.getElementById("offSound").play();
     }
-}
+  }
+
+  function createAccount() {
+    let newUser = document.getElementById("newUser").value;
+    let newPass = document.getElementById("newPass").value;
+
+    if(newUser && newPass) {
+      users[newUser] = newPass;
+      alert("Akun baru berhasil dibuat!\nUsername: " + newUser);
+    } else {
+      alert("Isi username dan password dulu!");
+    }
+  }
+
+  // AUTO LOGIN
+  if(localStorage.getItem("login") === "true") {
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("menuPage").style.display = "block";
+
+    if(localStorage.getItem("user") === "70") {
+      document.getElementById("adminPanel").style.display = "block";
+    }
+  }
 </script>
 
 </body>
