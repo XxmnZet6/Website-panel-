@@ -1,261 +1,199 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aimbot 70%</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aimbot 70%</title>
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:url('URL_GAMBAR_KAMU') no-repeat center center/cover;
+    color:white;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+.box{
+    width:320px;
+    background:rgba(0,0,0,0.7);
+    padding:20px;
+    border-radius:15px;
+    margin:60px auto;
+    box-shadow:0 0 15px cyan;
+}
 
-    body {
-      background: #111;
-      color: white;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      background-size: cover;
-      background-position: center;
-    }
+h2{
+    text-align:center;
+}
 
-    .overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 0;
-    }
+input{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+}
 
-    .box {
-      position: relative;
-      z-index: 2;
-      width: 340px;
-      background: rgba(20,20,20,0.95);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 0 20px rgba(0,255,255,0.3);
-    }
+button{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:cyan;
+    color:black;
+    font-weight:bold;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: cyan;
-    }
+.menu{
+    display:none;
+}
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 10px;
-      background: #222;
-      color: white;
-    }
+.toggle{
+    display:flex;
+    justify-content:space-between;
+    background:#111;
+    padding:10px;
+    margin-top:10px;
+    border-radius:10px;
+}
 
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 10px;
-      background: cyan;
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .menu {
-      display: none;
-    }
-
-    .module {
-      background: #1f1f1f;
-      padding: 10px;
-      border-radius: 12px;
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .switch {
-      width: 50px;
-      height: 25px;
-      background: #444;
-      border-radius: 30px;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .switch::before {
-      content: "";
-      width: 20px;
-      height: 20px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      top: 2.5px;
-      left: 3px;
-      transition: 0.3s;
-    }
-
-    .switch.active {
-      background: lime;
-    }
-
-    .switch.active::before {
-      left: 27px;
-    }
-
-    .admin-panel {
-      margin-top: 20px;
-      padding-top: 10px;
-      border-top: 1px solid #444;
-      display: none;
-    }
-
-    .status {
-      text-align: center;
-      margin-top: 10px;
-      color: lime;
-    }
-  </style>
+.clock{
+    text-align:center;
+    margin-top:10px;
+    font-size:18px;
+    color:cyan;
+}
+</style>
 </head>
 <body>
 
-<div class="overlay"></div>
+<div class="box" id="loginBox">
+    <h2>LOGIN PANEL</h2>
 
-<div class="box">
-
-  <!-- LOGIN -->
-  <div id="loginPage">
-    <h1>Aimbot 70%</h1>
+    <div class="clock" id="clock"></div>
 
     <input type="text" id="username" placeholder="Username">
     <input type="password" id="password" placeholder="Password">
 
     <button onclick="login()">LOGIN</button>
-
-    <div class="status" id="loginStatus"></div>
-  </div>
-
-  <!-- MENU -->
-  <div class="menu" id="menuPage">
-    <h1>MENU PANEL</h1>
-
-    <div class="module">
-      <span>Grafik Minecraft</span>
-      <div class="switch" onclick="toggle(this)"></div>
-    </div>
-
-    <div class="module">
-      <span>Module Gacor No Lag</span>
-      <div class="switch" onclick="toggle(this)"></div>
-    </div>
-
-    <div class="module">
-      <span>Aim Body</span>
-      <div class="switch" onclick="toggle(this)"></div>
-    </div>
-
-    <div class="module">
-      <span>FPS Boost</span>
-      <div class="switch" onclick="toggle(this)"></div>
-    </div>
-
-    <div class="module">
-      <span>Ultra Smooth</span>
-      <div class="switch" onclick="toggle(this)"></div>
-    </div>
-
-    <!-- ADMIN PANEL -->
-    <div class="admin-panel" id="adminPanel">
-      <h1 style="font-size:20px;">ADMIN PANEL</h1>
-
-      <input type="text" id="newUser" placeholder="Buat Username Baru">
-      <input type="password" id="newPass" placeholder="Buat Password Baru">
-
-      <button onclick="createAccount()">BUAT AKUN</button>
-    </div>
-  </div>
 </div>
 
-<audio id="onSound">
-  <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3" type="audio/mpeg">
-</audio>
+<div class="box menu" id="menuBox">
+    <h2>AIMBOT 70%</h2>
 
-<audio id="offSound">
-  <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mpeg">
-</audio>
+    <div class="clock" id="clock2"></div>
+
+    <div class="toggle">
+        <span>Module Gacor No Lag</span>
+        <input type="checkbox">
+    </div>
+
+    <div class="toggle">
+        <span>Aim Body</span>
+        <input type="checkbox">
+    </div>
+
+    <div class="toggle">
+        <span>Grafik Minecraft</span>
+        <input type="checkbox">
+    </div>
+
+    <div class="toggle">
+        <span>60 FPS Boost</span>
+        <input type="checkbox">
+    </div>
+
+    <div id="adminPanel" style="display:none; margin-top:20px;">
+        <h3>ADMIN PANEL</h3>
+
+        <input type="text" id="newUser" placeholder="Buat Username Baru">
+        <input type="password" id="newPass" placeholder="Buat Password Baru">
+
+        <button onclick="buatAkun()">BUAT AKUN</button>
+    </div>
+</div>
 
 <script>
-  // GANTI URL BACKGROUND DI SINI
-  document.body.style.backgroundImage = "url('https://www.google.com/imgres?imgurl=https://lookaside.instagram.com/seo/google_widget/crawler/?media_id%3D3876585038007994440&imgrefurl=https://www.instagram.com/p/DXMZZElD2an/&h=1920&w=1440&tbnid=F70EWgm9QB1bRM&tbnh=259&tbnw=194&osm=1&hcb=1&source=lens-native&docid=t-RLtphDBjVjJM')";
+// akun default
+if(!localStorage.getItem('accounts')){
+    localStorage.setItem('accounts', JSON.stringify([
+        {user:'70', pass:'70'}
+    ]));
+}
 
-  let users = {
-    "70": "70"
-  };
+function login(){
+    let u = document.getElementById('username').value;
+    let p = document.getElementById('password').value;
 
-  function login() {
-    let user = document.getElementById("username").value;
-    let pass = document.getElementById("password").value;
+    let akun = JSON.parse(localStorage.getItem('accounts'));
 
-    if(users[user] && users[user] === pass) {
-      localStorage.setItem("login", "true");
-      localStorage.setItem("user", user);
+    let cocok = akun.find(a => a.user === u && a.pass === p);
 
-      document.getElementById("loginPage").style.display = "none";
-      document.getElementById("menuPage").style.display = "block";
+    if(cocok){
+        localStorage.setItem('login','true');
+        localStorage.setItem('userlogin',u);
 
-      document.getElementById("loginStatus").innerHTML = "Login sukses";
+        document.getElementById('loginBox').style.display='none';
+        document.getElementById('menuBox').style.display='block';
 
-      if(user === "70") {
-        document.getElementById("adminPanel").style.display = "block";
-      }
+        // admin panel muncul kalau admin
+        if(u === '70' && p === '70'){
+            document.getElementById('adminPanel').style.display='block';
+        }
 
+        alert('Login berhasil');
     } else {
-      document.getElementById("loginStatus").innerHTML = "Username / Password salah";
+        alert('Username atau password salah');
     }
-  }
+}
 
-  function toggle(el) {
-    el.classList.toggle("active");
+function buatAkun(){
+    let nu = document.getElementById('newUser').value;
+    let np = document.getElementById('newPass').value;
 
-    if(el.classList.contains("active")) {
-      document.getElementById("onSound").play();
-    } else {
-      document.getElementById("offSound").play();
+    if(nu === '' || np === ''){
+        alert('Isi username dan password');
+        return;
     }
-  }
 
-  function createAccount() {
-    let newUser = document.getElementById("newUser").value;
-    let newPass = document.getElementById("newPass").value;
+    let akun = JSON.parse(localStorage.getItem('accounts'));
 
-    if(newUser && newPass) {
-      users[newUser] = newPass;
-      alert("Akun baru berhasil dibuat!\nUsername: " + newUser);
-    } else {
-      alert("Isi username dan password dulu!");
+    akun.push({user:nu, pass:np});
+
+    localStorage.setItem('accounts', JSON.stringify(akun));
+
+    alert('Akun baru berhasil dibuat');
+}
+
+// auto login
+if(localStorage.getItem('login') === 'true'){
+    document.getElementById('loginBox').style.display='none';
+    document.getElementById('menuBox').style.display='block';
+
+    let user = localStorage.getItem('userlogin');
+
+    if(user === '70'){
+        document.getElementById('adminPanel').style.display='block';
     }
-  }
+}
 
-  // AUTO LOGIN
-  if(localStorage.getItem("login") === "true") {
-    document.getElementById("loginPage").style.display = "none";
-    document.getElementById("menuPage").style.display = "block";
+// jam hari menit
+function updateClock(){
+    let now = new Date();
 
-    if(localStorage.getItem("user") === "70") {
-      document.getElementById("adminPanel").style.display = "block";
-    }
-  }
+    let hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+
+    let text = hari[now.getDay()] + ', ' +
+        now.getHours().toString().padStart(2,'0') + ':' +
+        now.getMinutes().toString().padStart(2,'0') + ':' +
+        now.getSeconds().toString().padStart(2,'0');
+
+    document.getElementById('clock').innerHTML = text;
+    document.getElementById('clock2').innerHTML = text;
+}
+
+setInterval(updateClock,1000);
+updateClock();
 </script>
 
 </body>
