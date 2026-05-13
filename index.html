@@ -1,200 +1,266 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aimbot 70%</title>
-<style>
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:url('URL_GAMBAR_KAMU') no-repeat center center/cover;
-    color:white;
-}
-
-.box{
-    width:320px;
-    background:rgba(0,0,0,0.7);
-    padding:20px;
-    border-radius:15px;
-    margin:60px auto;
-    box-shadow:0 0 15px cyan;
-}
-
-h2{
-    text-align:center;
-}
-
-input{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border:none;
-    border-radius:10px;
-}
-
-button{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border:none;
-    border-radius:10px;
-    background:cyan;
-    color:black;
-    font-weight:bold;
-}
-
-.menu{
-    display:none;
-}
-
-.toggle{
-    display:flex;
-    justify-content:space-between;
-    background:#111;
-    padding:10px;
-    margin-top:10px;
-    border-radius:10px;
-}
-
-.clock{
-    text-align:center;
-    margin-top:10px;
-    font-size:18px;
-    color:cyan;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INJECTOR KING ZET</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mainGreen: '#39ff14',
+                        panelDark: '#1a1a1a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow-neon {
+                text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
+            }
+            .toggle-switch:checked {
+                background-color: #39ff14;
+            }
+        }
+    </style>
 </head>
-<body>
-
-<div class="box" id="loginBox">
-    <h2>LOGIN PANEL</h2>
-
-    <div class="clock" id="clock"></div>
-
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-
-    <button onclick="login()">LOGIN</button>
-</div>
-
-<div class="box menu" id="menuBox">
-    <h2>AIMBOT 70%</h2>
-
-    <div class="clock" id="clock2"></div>
-
-    <div class="toggle">
-        <span>Module Gacor No Lag</span>
-        <input type="checkbox">
+<body id="bodyBg" class="bg-black min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat">
+    
+    <!-- Halaman Login Awal -->
+    <div id="loginPage" class="w-full max-w-[320px]">
+        <div class="bg-panelDark/90 backdrop-blur-md rounded-xl border-2 border-mainGreen/50 p-6 shadow-[0_0_20px_#39ff1440] text-center">
+            <h1 class="text-[#39ff14] text-4xl font-bold uppercase tracking-wider text-shadow-neon mb-2">INJECTOR</h1>
+            <h2 class="text-white text-xl font-semibold mb-6">KING ZET</h2>
+            
+            <div class="space-y-3 text-left">
+                <input id="loginUsername" type="text" placeholder="Username" class="w-full bg-[#2a2a2a] border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-mainGreen">
+                <input id="loginPassword" type="password" placeholder="Password" class="w-full bg-[#2a2a2a] border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-mainGreen">
+                <button id="masukBtn" class="w-full bg-mainGreen hover:bg-mainGreen/90 text-black font-bold py-3 rounded mt-2 transition-colors">
+                    MASUK
+                </button>
+                <p id="errorMsg" class="text-red-500 text-sm text-center mt-2 hidden">Username atau Password salah!</p>
+            </div>
+        </div>
     </div>
 
-    <div class="toggle">
-        <span>Aim Body</span>
-        <input type="checkbox">
+    <!-- Halaman Utama Setelah Login -->
+    <div id="mainPage" class="hidden w-full max-w-[320px]">
+        <div class="bg-panelDark/90 backdrop-blur-md rounded-xl border-2 border-mainGreen/50 p-5 shadow-[0_0_20px_#39ff1440]">
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <h1 class="text-[#39ff14] text-4xl font-bold uppercase tracking-wider text-shadow-neon">INJECTOR</h1>
+                <h2 class="text-white text-xl font-semibold mt-1">KING ZET</h2>
+                <div class="bg-[#2a2a2a] rounded-md flex items-center justify-between px-3 py-2 mt-3 border border-gray-700">
+                    <span class="text-mainGreen font-medium flex items-center gap-2">
+                        <i class="fa fa-shield"></i> INJECTOR KING ZET : MOBILE
+                    </span>
+                    <button class="text-white hover:text-mainGreen transition-colors">
+                        <i class="fa fa-times-circle"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Features List -->
+            <div class="space-y-4 mb-8">
+                <!-- Fitur 1 -->
+                <div class="flex items-center justify-between bg-[#2a2a2a] p-3 rounded-lg border border-gray-700 hover:border-mainGreen/50 transition-all">
+                    <div class="flex items-center gap-3">
+                        <i class="fa fa-bolt text-mainGreen text-lg"></i>
+                        <span class="text-white font-medium">UNLOCK 120 FPS</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer toggle-switch">
+                        <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                    </label>
+                </div>
+
+                <!-- Fitur 2 -->
+                <div class="flex items-center justify-between bg-[#2a2a2a] p-3 rounded-lg border border-gray-700 hover:border-mainGreen/50 transition-all">
+                    <div class="flex items-center gap-3">
+                        <i class="fa fa-crosshairs text-mainGreen text-lg"></i>
+                        <span class="text-white font-medium">AIM LOCK BADAN</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer toggle-switch">
+                        <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                    </label>
+                </div>
+
+                <!-- Fitur 3 -->
+                <div class="flex items-center justify-between bg-[#2a2a2a] p-3 rounded-lg border border-gray-700 hover:border-mainGreen/50 transition-all">
+                    <div class="flex items-center gap-3">
+                        <i class="fa fa-target text-mainGreen text-lg"></i>
+                        <span class="text-white font-medium">AIM HEADSHOT</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer toggle-switch">
+                        <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Admin Panel Button -->
+            <div class="text-center">
+                <button id="adminBtn" class="w-full bg-mainGreen/20 hover:bg-mainGreen/30 text-mainGreen font-bold py-3 rounded-lg border border-mainGreen/50 transition-all shadow-[0_0_10px_#39ff1430]">
+                    <i class="fa fa-user-secret mr-2"></i> ADMIN PANEL
+                </button>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard Modal -->
+        <div id="dashboardModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+            <div class="bg-panelDark border-2 border-mainGreen rounded-xl p-6 w-[320px] shadow-[0_0_30px_#39ff1440]">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-mainGreen font-bold text-xl">ADMIN DASHBOARD</h3>
+                    <button id="closeDashboard" class="text-white hover:text-mainGreen">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Ganti Background -->
+                <div class="mb-5 p-3 border border-gray-700 rounded-lg">
+                    <h4 class="text-white font-semibold mb-2 flex items-center gap-2">
+                        <i class="fa fa-image text-mainGreen"></i> GANTI BACKGROUND
+                    </h4>
+                    <input id="bgLink" type="text" placeholder="Masukkan link gambar..." class="w-full bg-[#2a2a2a] border border-gray-700 rounded p-2 text-white focus:outline-none focus:border-mainGreen mb-2">
+                    <button id="saveBgBtn" class="w-full bg-mainGreen hover:bg-mainGreen/90 text-black font-bold py-2 rounded transition-colors">
+                        TERAPKAN BACKGROUND
+                    </button>
+                    <button id="resetBgBtn" class="w-full bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 rounded mt-2 transition-colors">
+                        RESET KE HITAM
+                    </button>
+                </div>
+
+                <!-- Tambah User Baru -->
+                <div class="mb-5">
+                    <h4 class="text-white font-semibold mb-2">Tambah User Baru</h4>
+                    <div class="space-y-2">
+                        <input id="newUser" type="text" placeholder="Username Baru" class="w-full bg-[#2a2a2a] border border-gray-700 rounded p-2 text-white focus:outline-none focus:border-mainGreen">
+                        <input id="newPass" type="password" placeholder="Password Baru" class="w-full bg-[#2a2a2a] border border-gray-700 rounded p-2 text-white focus:outline-none focus:border-mainGreen">
+                        <button id="addUserBtn" class="w-full bg-mainGreen hover:bg-mainGreen/90 text-black font-bold py-2 rounded mt-1 transition-colors">
+                            SIMPAN USER
+                        </button>
+                        <p id="addSuccess" class="text-green-400 text-sm text-center mt-1 hidden">User berhasil ditambahkan!</p>
+                    </div>
+                </div>
+
+                <!-- Daftar User -->
+                <div>
+                    <h4 class="text-white font-semibold mb-2">Daftar User</h4>
+                    <ul id="userList" class="bg-[#2a2a2a] rounded p-2 max-h-[120px] overflow-y-auto text-sm text-white">
+                        <li class="text-gray-400 text-center">Belum ada user lain</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="toggle">
-        <span>Grafik Minecraft</span>
-        <input type="checkbox">
-    </div>
+    <script>
+        // Data Akun
+        const adminUser = "80";
+        const adminPass = "80";
+        let users = [];
 
-    <div class="toggle">
-        <span>60 FPS Boost</span>
-        <input type="checkbox">
-    </div>
+        // Elemen Login
+        const loginPage = document.getElementById('loginPage');
+        const mainPage = document.getElementById('mainPage');
+        const loginUsername = document.getElementById('loginUsername');
+        const loginPassword = document.getElementById('loginPassword');
+        const masukBtn = document.getElementById('masukBtn');
+        const errorMsg = document.getElementById('errorMsg');
 
-    <div id="adminPanel" style="display:none; margin-top:20px;">
-        <h3>ADMIN PANEL</h3>
+        // Elemen Admin
+        const adminBtn = document.getElementById('adminBtn');
+        const dashboardModal = document.getElementById('dashboardModal');
+        const closeDashboard = document.getElementById('closeDashboard');
+        const newUser = document.getElementById('newUser');
+        const newPass = document.getElementById('newPass');
+        const addUserBtn = document.getElementById('addUserBtn');
+        const addSuccess = document.getElementById('addSuccess');
+        const userList = document.getElementById('userList');
 
-        <input type="text" id="newUser" placeholder="Buat Username Baru">
-        <input type="password" id="newPass" placeholder="Buat Password Baru">
+        // Elemen Background
+        const bodyBg = document.getElementById('bodyBg');
+        const bgLink = document.getElementById('bgLink');
+        const saveBgBtn = document.getElementById('saveBgBtn');
+        const resetBgBtn = document.getElementById('resetBgBtn');
 
-        <button onclick="buatAkun()">BUAT AKUN</button>
-    </div>
-</div>
+        // Fungsi Login
+        masukBtn.addEventListener('click', () => {
+            if(loginUsername.value === adminUser && loginPassword.value === adminPass) {
+                loginPage.classList.add('hidden');
+                mainPage.classList.remove('hidden');
+                errorMsg.classList.add('hidden');
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        });
 
-<script>
-// akun default
-if(!localStorage.getItem('accounts')){
-    localStorage.setItem('accounts', JSON.stringify([
-        {user:'70', pass:'70'}
-    ]));
-}
+        // Buka Admin Panel
+        adminBtn.addEventListener('click', () => {
+            dashboardModal.classList.remove('hidden');
+            showUserList();
+        });
 
-function login(){
-    let u = document.getElementById('username').value;
-    let p = document.getElementById('password').value;
+        // Tutup Admin Panel
+        closeDashboard.addEventListener('click', () => {
+            dashboardModal.classList.add('hidden');
+        });
 
-    let akun = JSON.parse(localStorage.getItem('accounts'));
+        // Tambah User Baru
+        addUserBtn.addEventListener('click', () => {
+            if(newUser.value && newPass.value) {
+                users.push({username: newUser.value, password: newPass.value});
+                addSuccess.classList.remove('hidden');
+                newUser.value = '';
+                newPass.value = '';
+                setTimeout(() => addSuccess.classList.add('hidden'), 2000);
+                showUserList();
+            }
+        });
 
-    let cocok = akun.find(a => a.user === u && a.pass === p);
-
-    if(cocok){
-        localStorage.setItem('login','true');
-        localStorage.setItem('userlogin',u);
-
-        document.getElementById('loginBox').style.display='none';
-        document.getElementById('menuBox').style.display='block';
-
-        // admin panel muncul kalau admin
-        if(u === '70' && p === '70'){
-            document.getElementById('adminPanel').style.display='block';
+        // Tampilkan Daftar User
+        function showUserList() {
+            userList.innerHTML = '';
+            if(users.length === 0) {
+                userList.innerHTML = '<li class="text-gray-400 text-center">Belum ada user lain</li>';
+            } else {
+                users.forEach(u => {
+                    const li = document.createElement('li');
+                    li.className = 'border-b border-gray-700 py-1';
+                    li.innerHTML = `<strong>${u.username}</strong> : ${u.password}`;
+                    userList.appendChild(li);
+                });
+            }
         }
 
-        alert('Login berhasil');
-    } else {
-        alert('Username atau password salah');
-    }
-}
+        // Ganti Background
+        saveBgBtn.addEventListener('click', () => {
+            if(bgLink.value) {
+                bodyBg.style.backgroundImage = `url('${bgLink.value}')`;
+                bgLink.value = '';
+                dashboardModal.classList.add('hidden');
+            }
+        });
 
-function buatAkun(){
-    let nu = document.getElementById('newUser').value;
-    let np = document.getElementById('newPass').value;
+        // Reset Background
+        resetBgBtn.addEventListener('click', () => {
+            bodyBg.style.backgroundImage = '';
+            bgLink.value = '';
+        });
 
-    if(nu === '' || np === ''){
-        alert('Isi username dan password');
-        return;
-    }
-
-    let akun = JSON.parse(localStorage.getItem('accounts'));
-
-    akun.push({user:nu, pass:np});
-
-    localStorage.setItem('accounts', JSON.stringify(akun));
-
-    alert('Akun baru berhasil dibuat');
-}
-
-// auto login
-if(localStorage.getItem('login') === 'true'){
-    document.getElementById('loginBox').style.display='none';
-    document.getElementById('menuBox').style.display='block';
-
-    let user = localStorage.getItem('userlogin');
-
-    if(user === '70'){
-        document.getElementById('adminPanel').style.display='block';
-    }
-}
-
-// jam hari menit
-function updateClock(){
-    let now = new Date();
-
-    let hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-
-    let text = hari[now.getDay()] + ', ' +
-        now.getHours().toString().padStart(2,'0') + ':' +
-        now.getMinutes().toString().padStart(2,'0') + ':' +
-        now.getSeconds().toString().padStart(2,'0');
-
-    document.getElementById('clock').innerHTML = text;
-    document.getElementById('clock2').innerHTML = text;
-}
-
-setInterval(updateClock,1000);
-updateClock();
-</script>
-
+        // Tutup modal jika klik di luar area
+        window.addEventListener('click', (e) => {
+            if (e.target === dashboardModal) dashboardModal.classList.add('hidden');
+        });
+    </script>
 </body>
 </html>
