@@ -3,264 +3,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INJECTOR KING ZET</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        mainGreen: '#39ff14',
-                        panelDark: '#1a1a1a',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                }
-            }
+    <title>Webb Kingzetz - Panel Kontrol Sakura Fullscreen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
         }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .text-shadow-neon {
-                text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
-            }
-            .toggle-switch:checked {
-                background-color: #39ff14;
-            }
+
+        /* Mengunci halaman fullscreen dengan background gambar 1000597765.jpg */
+        body {
+            background: url('https://sparkling-brown-fjalonaz.edgeone.app/46d45c9523851230ab5a8f6be466aa75.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px;
+            /* Memutar gambar background agar posisinya lurus (landscape) jika miring */
+            transform: rotate(0deg); 
+        }
+
+        /* Overlay gelap transparan dengan nuansa ungu/pink agar teks kontras dan terbaca */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 10, 25, 0.5);
+            z-index: 1;
+        }
+
+        /* Container Box dengan gaya kaca transparan (Glassmorphism) bernuansa Sakura */
+        .login-container, .panel-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(20, 10, 25, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 2px solid rgba(255, 105, 180, 0.4);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 105, 180, 0.2);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .panel-container {
+            max-width: 650px;
+            width: 95vw;
+            max-height: 95vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        h1 {
+            color: #ff69b4;
+            text-shadow: 0 0 12px #ff69b4;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #ffaa44;
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            background: rgba(30, 15, 35, 0.8);
+            border: 2px solid #ff69b4;
+            border-radius: 40px;
+            color: #ff69b4;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+        }
+
+        button.btn-primary {
+            background: #ff69b4;
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        button.btn-primary:hover {
+            background: #ff4500;
+            box-shadow: 0 0 20px #ff69b4;
+        }
+
+        /* Grid Fitur */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        /* Card untuk Switch ON/OFF tema sakura */
+        .feature-card {
+            background: rgba(35, 15, 40, 0.6);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            padding: 12px 18px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .feature-card.active {
+            border-color: #ff69b4;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+            background: rgba(255, 105, 180, 0.15);
+        }
+
+        .feature-info {
+            text-align: left;
+        }
+
+        .feature-name {
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 3px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .feature-status {
+            font-size: 11px;
+            color: #ff5555;
+            font-weight: bold;
+        }
+
+        .feature-card.active .feature-status {
+            color: #ff69b4;
+            text-shadow: 0 0 5px rgba(255,105,180,0.6);
+        }
+
+        /* Desain Toggle Switch Merah Muda / Pink */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #442545;
+            transition: .3s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #ff69b4;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+            background-color: #1e0520;
+        }
+
+        /* Area Notifikasi Alert */
+        #messageArea {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px 0;
+        }
+
+        .success-msg {
+            color: #ff69b4;
+            background: rgba(255, 105, 180, 0.2);
+            border: 1px solid #ff69b4;
+            padding: 6px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* Area Grafik */
+        .grafik-area {
+            background: rgba(25, 10, 30, 0.6);
+            border-radius: 16px;
+            padding: 12px;
+            border: 1px solid rgba(255, 105, 180, 0.2);
+        }
+
+        canvas {
+            background: rgba(15, 5, 20, 0.85);
+            border-radius: 12px;
+            width: 100%;
+            height: 130px;
+            border: 1px solid rgba(255, 105, 180, 0.25);
+        }
+
+        .footer {
+            font-size: 11px;
+            color: #ff69b4;
+            margin-top: 5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
     </style>
 </head>
-<body id="bodyBg" class="bg-black min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat">
-    
-    <!-- Halaman Login Awal -->
-    <div id="loginPage" class="w-full max-w-[320px]">
-        <div class="bg-panelDark/90 backdrop-blur-md rounded-xl border-2 border-mainGreen/50 p-6 shadow-[0_0_20px_#39ff1440] text-center">
-            <h1 class="text-[#39ff14] text-4xl font-bold uppercase tracking-wider text-shadow-neon mb-2">INJECTOR</h1>
-            <h2 class="text-white text-xl font-semibold mb-6">KING ZET</h2>
+<body>
+
+<div id="app" style="position: relative; z-index: 2;">
+    <!-- Panel Login -->
+    <div id="loginPanel" class="login-container">
+        <h1>⚡ WEBB KINGZETZ ⚡</h1>
+        <h2>🔐 MASUKKAN PASSWORD</h2>
+        <input type="password" id="passwordInput" placeholder="Password">
+        <button class="btn-primary" onclick="login()">AKSES PANEL</button>
+        <div class="footer" style="margin-top: 20px; color: #ffaa44;">© Kingzetz Security Suite</div>
+    </div>
+
+    <!-- Panel Utama -->
+    <div id="mainPanel" class="panel-container" style="display: none;">
+        <div>
+            <h1>👑 KING ZETZ PANEL 👑</h1>
+            <div class="footer" style="color: #ffaa44;">STATUS: CONNECTED TO SERVER</div>
+        </div>
+
+        <!-- Grid Tombol Switch Fitur -->
+        <div class="feature-grid">
+            <div class="feature-card" id="card-GRAFIK">
+                <div class="feature-info">
+                    <div class="feature-name">GRAFIK MC</div>
+                    <div class="feature-status" id="status-GRAFIK">OFF</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="switch-GRAFIK" onchange="toggleFeature('GRAFIK MC', 'GRAFIK')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="feature-card" id="card-AIMBOT">
+                <div class="feature-info">
+                    <div class="feature-name">AIM BOT</div>
+                    <div class="feature-status" id="status-AIMBOT">OFF</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="switch-AIMBOT" onchange="toggleFeature('AIM BOT', 'AIMBOT')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="feature-card" id="card-AIMNECK">
+                <div class="feature-info">
+                    <div class="feature-name">AIM NECK</div>
+                    <div class="feature-status" id="status-AIMNECK">OFF</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="switch-AIMNECK" onchange="toggleFeature('AIM NECK', 'AIMNECK')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="feature-card" id="card-AIMBADAN">
+                <div class="feature-info">
+                    <div class="feature-name">AIM BADAN 90</div>
+                    <div class="feature-status" id="status-AIMBADAN">OFF</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="switch-AIMBADAN" onchange="toggleFeature('AIM BADAN 90', 'AIMBADAN')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Notifikasi Status Aktif/Mati -->
+        <div id="messageArea"></div>
+
+        <!-- Grafik Real-time -->
+        <div class="grafik-area">
+            <canvas id="mcChart"></canvas>
+            <div class="footer">📈 Statistik Real-time Performance</div>
+        </div>
+
+        <!-- Tombol Logout -->
+        <div>
+            <button onclick="logout()" style="background:#aa3344; color:#fff; border:none; padding:10px; border-radius:40px; font-weight:bold; cursor:pointer; width:100%;">🔓 Logout</button>
+            <div class="footer" style="margin-top: 8px; color: #ffaa44;">⚡ Success Active Panel King Zetz</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const CORRECT_PASSWORD = "xmnxbbek";
+    let interval;
+
+    function login() {
+        const inputPass = document.getElementById('passwordInput').value;
+        if (inputPass === CORRECT_PASSWORD) {
+            document.getElementById('loginPanel').style.display = 'none';
+            document.getElementById('mainPanel').style.display = 'flex';
+            drawGrafikMC();
+            startAutoRefresh();
+        } else {
+            alert("❌ PASSWORD SALAH! Akses ditolak.");
+        }
+    }
+
+    function logout() {
+        document.querySelectorAll('.switch input').forEach(sw => sw.checked = false);
+        document.querySelectorAll('.feature-card').forEach(card => card.classList.remove('active'));
+        document.querySelectorAll('.feature-status').forEach(status => status.innerText = 'OFF');
+
+        if (interval) clearInterval(interval);
+        
+        document.getElementById('loginPanel').style.display = 'block';
+        document.getElementById('mainPanel').style.display = 'none';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('messageArea').innerHTML = '';
+    }
+
+    function toggleFeature(featureName, elementId) {
+        const checkbox = document.getElementById(`switch-${elementId}`);
+        const card = document.getElementById(`card-${elementId}`);
+        const statusText = document.getElementById(`status-${elementId}`);
+        const msgDiv = document.getElementById('messageArea');
+
+        if (checkbox.checked) {
+            card.classList.add('active');
+            statusText.innerText = "ON";
+            msgDiv.innerHTML = `<div class="success-msg">✅ ${featureName} ACTIVATED</div>`;
             
-            <div class="space-y-3 text-left">
-                <input id="loginUsername" type="text" placeholder="Username" class="w-full bg-[#2a2a2a] border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-mainGreen">
-                <input id="loginPassword" type="password" placeholder="Password" class="w-full bg-[#2a2a2a] border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-mainGreen">
-                <button id="masukBtn" class="w-full bg-mainGreen hover:bg-mainGreen/90 text-black font-bold py-3 rounded mt-2 transition-colors">
-                    MASUK
-                </button>
-                <p id="errorMsg" class="text-red-500 text-sm text-center mt-2 hidden">Username atau Password salah!</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Halaman Utama Setelah Login -->
-    <div id="mainPage" class="hidden w-full max-w-[320px]">
-        <div class="bg-panelDark/90 backdrop-blur-md rounded-xl border-2 border-mainGreen/50 p-5 shadow-[0_0_20px_#39ff1440]">
-            <!-- Header -->
-            <div class="text-center mb-6">
-                <h1 class="text-[#39ff14] text-4xl font-bold uppercase tracking-wider text-shadow-neon">INJECTOR</h1>
-                <h2 class="text-white text-xl font-semibold mt-1">KING ZET</h2>
-                <div class="bg-[#2a2a2a] rounded-md flex items-center justify-between px-3 py-2 mt-3 border border-gray-700">
-                    <span class="text-mainGreen font-medium flex items-center gap-2">
-                        <i class="fa fa-shield"></i> INJECTOR KING ZET : MOBILE
-                    </span>
-                    <button class="text-white hover:text-mainGreen transition-colors">
-                        <i class="fa fa-times-circle"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Features List -->
-            <div class="space-y-4 mb-8">
-                <!-- Fitur 1 -->
-                <div class="flex items-center justify-between bg-[#2a2a2a] p-3 rounded-lg border border-gray-700 hover:border-mainGreen/50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <i class="fa fa-bolt text-mainGreen text-lg"></i>
-                        <span class="text-white font-medium">UNLOCK 120 FPS</span>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" class="sr-only peer toggle-switch">
-                        <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-                    </label>
-                </div>
-
-                <!-- Fitur 2 -->
-                <div class="flex items-center justify-between bg-[#2a2a2a] p-3 rounded-lg border border-gray-700 hover:border-mainGreen/50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <i class="fa fa-crosshairs text-mainGreen text-lg"></i>
-                        <span class="text-white font-medium">AIM LOCK BADAN</span>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" class="sr-only peer toggle-switch">
-                        <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-                    </label>
-                </div>
-
-                <!-- Fitur 3 -->
-                <div class="flex items-center justify-between bg-[#2a2a2a] p-3 rounded-lg border border-gray-700 hover:border-mainGreen/50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <i class="fa fa-target text-mainGreen text-lg"></i>
-                        <span class="text-white font-medium">AIM HEADSHOT</span>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" class="sr-only peer toggle-switch">
-                        <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Admin Panel Button -->
-            <div class="text-center">
-                <button id="adminBtn" class="w-full bg-mainGreen/20 hover:bg-mainGreen/30 text-mainGreen font-bold py-3 rounded-lg border border-mainGreen/50 transition-all shadow-[0_0_10px_#39ff1430]">
-                    <i class="fa fa-user-secret mr-2"></i> ADMIN PANEL
-                </button>
-            </div>
-        </div>
-
-        <!-- Admin Dashboard Modal -->
-        <div id="dashboardModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-            <div class="bg-panelDark border-2 border-mainGreen rounded-xl p-6 w-[320px] shadow-[0_0_30px_#39ff1440]">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-mainGreen font-bold text-xl">ADMIN DASHBOARD</h3>
-                    <button id="closeDashboard" class="text-white hover:text-mainGreen">
-                        <i class="fa fa-times"></i>
-                    </button>
-                </div>
-
-                <!-- Ganti Background -->
-                <div class="mb-5 p-3 border border-gray-700 rounded-lg">
-                    <h4 class="text-white font-semibold mb-2 flex items-center gap-2">
-                        <i class="fa fa-image text-mainGreen"></i> GANTI BACKGROUND
-                    </h4>
-                    <input id="bgLink" type="text" placeholder="Masukkan link gambar..." class="w-full bg-[#2a2a2a] border border-gray-700 rounded p-2 text-white focus:outline-none focus:border-mainGreen mb-2">
-                    <button id="saveBgBtn" class="w-full bg-mainGreen hover:bg-mainGreen/90 text-black font-bold py-2 rounded transition-colors">
-                        TERAPKAN BACKGROUND
-                    </button>
-                    <button id="resetBgBtn" class="w-full bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 rounded mt-2 transition-colors">
-                        RESET KE HITAM
-                    </button>
-                </div>
-
-                <!-- Tambah User Baru -->
-                <div class="mb-5">
-                    <h4 class="text-white font-semibold mb-2">Tambah User Baru</h4>
-                    <div class="space-y-2">
-                        <input id="newUser" type="text" placeholder="Username Baru" class="w-full bg-[#2a2a2a] border border-gray-700 rounded p-2 text-white focus:outline-none focus:border-mainGreen">
-                        <input id="newPass" type="password" placeholder="Password Baru" class="w-full bg-[#2a2a2a] border border-gray-700 rounded p-2 text-white focus:outline-none focus:border-mainGreen">
-                        <button id="addUserBtn" class="w-full bg-mainGreen hover:bg-mainGreen/90 text-black font-bold py-2 rounded mt-1 transition-colors">
-                            SIMPAN USER
-                        </button>
-                        <p id="addSuccess" class="text-green-400 text-sm text-center mt-1 hidden">User berhasil ditambahkan!</p>
-                    </div>
-                </div>
-
-                <!-- Daftar User -->
-                <div>
-                    <h4 class="text-white font-semibold mb-2">Daftar User</h4>
-                    <ul id="userList" class="bg-[#2a2a2a] rounded p-2 max-h-[120px] overflow-y-auto text-sm text-white">
-                        <li class="text-gray-400 text-center">Belum ada user lain</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Data Akun
-        const adminUser = "80";
-        const adminPass = "80";
-        let users = [];
-
-        // Elemen Login
-        const loginPage = document.getElementById('loginPage');
-        const mainPage = document.getElementById('mainPage');
-        const loginUsername = document.getElementById('loginUsername');
-        const loginPassword = document.getElementById('loginPassword');
-        const masukBtn = document.getElementById('masukBtn');
-        const errorMsg = document.getElementById('errorMsg');
-
-        // Elemen Admin
-        const adminBtn = document.getElementById('adminBtn');
-        const dashboardModal = document.getElementById('dashboardModal');
-        const closeDashboard = document.getElementById('closeDashboard');
-        const newUser = document.getElementById('newUser');
-        const newPass = document.getElementById('newPass');
-        const addUserBtn = document.getElementById('addUserBtn');
-        const addSuccess = document.getElementById('addSuccess');
-        const userList = document.getElementById('userList');
-
-        // Elemen Background
-        const bodyBg = document.getElementById('bodyBg');
-        const bgLink = document.getElementById('bgLink');
-        const saveBgBtn = document.getElementById('saveBgBtn');
-        const resetBgBtn = document.getElementById('resetBgBtn');
-
-        // Fungsi Login
-        masukBtn.addEventListener('click', () => {
-            if(loginUsername.value === adminUser && loginPassword.value === adminPass) {
-                loginPage.classList.add('hidden');
-                mainPage.classList.remove('hidden');
-                errorMsg.classList.add('hidden');
-            } else {
-                errorMsg.classList.remove('hidden');
+            if (featureName === "GRAFIK MC") {
+                drawGrafikMC(true);
             }
-        });
-
-        // Buka Admin Panel
-        adminBtn.addEventListener('click', () => {
-            dashboardModal.classList.remove('hidden');
-            showUserList();
-        });
-
-        // Tutup Admin Panel
-        closeDashboard.addEventListener('click', () => {
-            dashboardModal.classList.add('hidden');
-        });
-
-        // Tambah User Baru
-        addUserBtn.addEventListener('click', () => {
-            if(newUser.value && newPass.value) {
-                users.push({username: newUser.value, password: newPass.value});
-                addSuccess.classList.remove('hidden');
-                newUser.value = '';
-                newPass.value = '';
-                setTimeout(() => addSuccess.classList.add('hidden'), 2000);
-                showUserList();
-            }
-        });
-
-        // Tampilkan Daftar User
-        function showUserList() {
-            userList.innerHTML = '';
-            if(users.length === 0) {
-                userList.innerHTML = '<li class="text-gray-400 text-center">Belum ada user lain</li>';
-            } else {
-                users.forEach(u => {
-                    const li = document.createElement('li');
-                    li.className = 'border-b border-gray-700 py-1';
-                    li.innerHTML = `<strong>${u.username}</strong> : ${u.password}`;
-                    userList.appendChild(li);
-                });
-            }
+        } else {
+            card.classList.remove('active');
+            statusText.innerText = "OFF";
+            msgDiv.innerHTML = `<div class="success-msg" style="color:#ff4444; border-color:#ff4444; background:rgba(255,0,0,0.15)">❌ ${featureName} DEACTIVATED</div>`;
         }
 
-        // Ganti Background
-        saveBgBtn.addEventListener('click', () => {
-            if(bgLink.value) {
-                bodyBg.style.backgroundImage = `url('${bgLink.value}')`;
-                bgLink.value = '';
-                dashboardModal.classList.add('hidden');
+        setTimeout(() => {
+            msgDiv.innerHTML = '';
+        }, 2000);
+    }
+
+    function drawGrafikMC(animate = false) {
+        const canvas = document.getElementById('mcChart');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        const w = canvas.offsetWidth;
+        const h = canvas.offsetHeight;
+        canvas.width = w;
+        canvas.height = h;
+
+        const dataPoints = [];
+        for(let i=0; i<20; i++) {
+            dataPoints.push(Math.floor(Math.random() * 35) + 25);
+        }
+        
+        ctx.clearRect(0, 0, w, h);
+        
+        ctx.strokeStyle = "rgba(255, 105, 180, 0.08)";
+        ctx.lineWidth = 1;
+        for(let i = 20; i < h; i += 20) {
+            ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(w, i); ctx.stroke();
+        }
+        
+        const stepX = w / (dataPoints.length - 1);
+        const maxVal = Math.max(...dataPoints, 1);
+        const minVal = Math.min(...dataPoints, 0);
+        const range = maxVal - minVal || 1;
+        
+        ctx.beginPath();
+        let x = 0;
+        let y = h - ((dataPoints[0] - minVal) / range) * (h - 40) - 20;
+        ctx.moveTo(x, y);
+        
+        for (let i = 1; i < dataPoints.length; i++) {
+            x = i * stepX;
+            y = h - ((dataPoints[i] - minVal) / range) * (h - 40) - 20;
+            ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = "#ff69b4";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        ctx.lineTo(x, h);
+        ctx.lineTo(0, h);
+        let gradient = ctx.createLinearGradient(0, 0, 0, h);
+        gradient.addColorStop(0, "rgba(255, 105, 180, 0.25)");
+        gradient.addColorStop(1, "rgba(255, 105, 180, 0)");
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        if (animate) {
+            canvas.style.filter = "drop-shadow(0 0 8px #ff69b4)";
+            setTimeout(() => { canvas.style.filter = ""; }, 250);
+        }
+    }
+
+    function startAutoRefresh() {
+        if (interval) clearInterval(interval);
+        interval = setInterval(() => {
+            if (document.getElementById('mainPanel').style.display === 'flex') {
+                drawGrafikMC();
             }
-        });
+        }, 3000);
+    }
 
-        // Reset Background
-        resetBgBtn.addEventListener('click', () => {
-            bodyBg.style.backgroundImage = '';
-            bgLink.value = '';
-        });
+    window.addEventListener('resize', () => {
+        if (document.getElementById('mainPanel').style.display === 'flex') {
+            drawGrafikMC();
+        }
+    });
+</script>
 
-        // Tutup modal jika klik di luar area
-        window.addEventListener('click', (e) => {
-            if (e.target === dashboardModal) dashboardModal.classList.add('hidden');
-        });
-    </script>
 </body>
 </html>
