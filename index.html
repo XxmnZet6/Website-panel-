@@ -1,40 +1,116 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webb Kingzetz - Panel Kontrol Sakura Fullscreen</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Courier New', monospace;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>King Zet — FF UI Mockup</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;color:#fff;background:#080b16;min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:
+radial-gradient(circle at 20% 20%,#5b2cff55,transparent 35%),
+radial-gradient(circle at 80% 75%,#00d9ff33,transparent 38%),
+linear-gradient(135deg,#080b16,#15102b 55%,#050812);z-index:-2}
+body:after{content:"GOJO";position:fixed;right:-35px;bottom:-25px;font-size:23vw;font-weight:900;color:#ffffff08;z-index:-1}
+.wrap{width:min(430px,94vw);margin:25px auto;padding:18px}
+.card{background:#111629dd;border:1px solid #7d6cff66;border-radius:24px;box-shadow:0 0 35px #5c45ff33;backdrop-filter:blur(12px);padding:20px}
+.logo{text-align:center;font-size:32px;font-weight:900;letter-spacing:3px;text-shadow:0 0 18px #8b7cff}
+.sub{text-align:center;color:#aeb5d7;font-size:12px;margin:5px 0 20px}
+.badge{display:inline-block;padding:5px 10px;border-radius:20px;background:#6c4dff22;border:1px solid #806cff66;color:#bdb5ff;font-size:11px}
+.section{margin-top:18px;color:#9da5ca;font-size:11px;text-transform:uppercase;letter-spacing:2px}
+.item{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:14px 13px;background:#0b1020;border:1px solid #262d49;border-radius:15px}
+.name{font-weight:700}.desc{font-size:10px;color:#777f9e;margin-top:3px}
+.switch{width:48px;height:26px;border-radius:20px;background:#292f46;position:relative;cursor:pointer;transition:.2s}
+.switch:before{content:"";position:absolute;width:20px;height:20px;top:3px;left:3px;background:#aaa;border-radius:50%;transition:.2s}
+.switch.on{background:#7057ff;box-shadow:0 0 15px #7057ff88}
+.switch.on:before{left:25px;background:#fff}
+.status{text-align:center;margin-top:18px;padding:10px;border-radius:12px;background:#0b1020;color:#8e96b8;font-size:11px}
+button{width:100%;margin-top:14px;border:0;border-radius:14px;padding:13px;background:linear-gradient(90deg,#644cff,#8d72ff);color:#fff;font-weight:800;cursor:pointer}
+.footer{text-align:center;color:#666d89;font-size:9px;margin-top:16px}
+</style>
+</head>
+<body>
+<div id="login" class="wrap"><div class="card" style="text-align:center">
+  <div class="logo">KING ZET</div>
+  <div class="sub">LOGIN PANEL • GOJO EDITION</div>
+  <div class="badge">🔐 MEMBER LOGIN</div>
+  <input id="username" placeholder="Username" autocomplete="off"
+    style="display:block;width:100%;margin-top:18px;padding:14px;border-radius:13px;border:1px solid #303653;background:#0b1020;color:white;outline:none">
+  <input id="password" type="password" placeholder="Password"
+    style="display:block;width:100%;margin-top:10px;padding:14px;border-radius:13px;border:1px solid #303653;background:#0b1020;color:white;outline:none">
+  <button onclick="login()">LOGIN</button>
+  <div id="error" style="margin-top:10px;color:#ff7187;font-size:11px"></div>
+  <div class="footer">Demo UI • Login hanya untuk tampilan</div>
+</div></div>
 
-        /* Mengunci halaman fullscreen dengan background gambar 1000597765.jpg */
-        body {
-            background: url('https://sparkling-brown-fjalonaz.edgeone.app/46d45c9523851230ab5a8f6be466aa75.jpg') no-repeat center center fixed;
-            background-size: cover;
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            padding: 20px;
-            /* Memutar gambar background agar posisinya lurus (landscape) jika miring */
-            transform: rotate(0deg); 
-        }
+<div id="menu" class="wrap" style="display:none"><div class="card">
+  <div class="logo">KING ZET</div>
+  <div class="sub">FREE FIRE UI MOCKUP • GOJO EDITION</div>
+  <div style="text-align:center"><span class="badge">● KING ZET MODE ONLY</span></div>
 
-        /* Overlay gelap transparan dengan nuansa ungu/pink agar teks kontras dan terbaca */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 10, 25, 0.5);
-            z-index: 1;
-        }
+  <div class="section">MENUV1</div>
+  <div class="item"><div><div class="name">Body Lock</div><div class="desc">SAFEMODE </div></div><div class="switch" onclick="toggle(this)"></div></div>
+  <div class="item"><div><div class="name">Aim Lock</div><div class="desc">SAFEMODE</div></div><div class="switch" onclick="toggle(this)"></div></div>
+  <div class="item"><div><div class="name">Head Shot</div><div class="desc">SAFEMODE</div></div><div class="switch" onclick="toggle(this)"></div></div>
+
+  <div class="section">MENUV2</div>
+  <div class="item"><div><div class="name">BYPASS</div><div class="desc">MENU</div></div><div class="switch" onclick="toggle(this)"></div></div>
+  <div class="item"><div><div class="name">ACTIVEALL</div><div class="desc">MENU</div></div><div class="switch" onclick="toggle(this)"></div></div>
+  <div class="item"><div><div class="name">Crosshair</div><div class="desc">MENU</div></div><div class="switch" onclick="toggle(this)"></div></div>
+
+  <div class="section">DEV</div>
+  <div class="item"><div><div class="name">ANTIBANON</div><div class="desc">DEVBYZETonly</div></div><div class="switch" onclick="toggle(this)"></div></div>
+  <div class="item"><div><div class="name">DEVBYZET</div><div class="desc">DEVBYZETonly</div></div><div class="switch" onclick="toggle(this)"></div></div>
+
+  <div class="status" id="status">Status: READY</div>
+  <button onclick="resetAll()">RESET ALL</button>
+  <button onclick="logout()" style="background:#292f46">LOGOUT</button>
+  <div class="footer">King Zet • Web khusus aim king zet•  terhubung ke Free Fire</div>
+</div></div>
+
+<script>
+function login(){
+  const user=document.getElementById('username').value;
+  const pass=document.getElementById('password').value;
+  if(user==='123' && pass==='123'){
+    document.getElementById('login').style.display='none';
+    document.getElementById('menu').style.display='block';
+    document.getElementById('error').textContent='';
+  }else{
+    document.getElementById('error').textContent='Username atau password salah!';
+  }
+}
+function logout(){
+  document.getElementById('menu').style.display='none';
+  document.getElementById('login').style.display='block';
+  document.getElementById('password').value='';
+}
+let audioCtx;
+function successSound(){
+  audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+  const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+  o.type='sine'; o.frequency.setValueAtTime(660,audioCtx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(990,audioCtx.currentTime+0.12);
+  g.gain.setValueAtTime(0.0001,audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.12,audioCtx.currentTime+0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+0.18);
+  o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime+0.18);
+}
+function toggle(el){
+  el.classList.toggle('on');
+  if(el.classList.contains('on')) successSound();
+  const active=document.querySelectorAll('.switch.on').length;
+  document.getElementById('status').textContent='Status: '+active+' OPTION AKTIF';
+}
+function resetAll(){
+  document.querySelectorAll('.switch').forEach(x=>x.classList.remove('on'));
+  document.getElementById('status').textContent='Status: READY';
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter' && document.getElementById('login').style.display!=='none') login();
+});
+</script>
+</body>
+</html>        }
 
         /* Container Box dengan gaya kaca transparan (Glassmorphism) bernuansa Sakura */
         .login-container, .panel-container {
